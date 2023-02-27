@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script/jquery-3.6.0.min.js"></script>
+    <script src="script/script.js"></script>
+    <script>
+        $('document').ready(() => {
+
+
+
+            $(".game-board").on('click', '.box', function () {
+
+                console.log($(this).index());
+
+
+
+                $.get("https://localhost:7225/api/Game/" + $(this).index(), function (data) {
+
+                    for (let i = 0; i < $(".box").length; i++) {
+
+                        $('.game-board').children().eq(i).text("" + data[i]);
+                    }
+                });
+
+                $.get("https://localhost:7225/api/Game", function (data) {
+
+                    console.log(data)
+
+                });
+
+            })
+
+
+
+        })
+
+
+    </script>
+    <style>
+        body {
+            margin: 0%;
+            background-color: #22272e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .game-board {
+            aspect-ratio: 1/1;
+            width: 80%;
+            max-width: 544px;
+            max-height: 90%;
+            padding-bottom: -4px;
+            padding-top: -4px;
+            color: #a6a7a8;
+            border: 6px solid #2d333b;
+            background-color: #2d333b;
+            border-radius: 10px;
+            display: grid;
+            grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+        }
+
+        .box {
+
+            background-color: #22272e;
+            border: 8px solid #424a54;
+            border-radius: 4px;
+            font-family: Helvetica;
+            font-weight: bold;
+            font-size: 4em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (min-width: 1080px) {
+            .box:hover {
+                background-color: #2d333b;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-board">
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+    </div>
+</body>
+
+</html>
